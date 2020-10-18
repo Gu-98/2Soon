@@ -8,12 +8,13 @@ $.ajaxPrefilter(function (opt) {
     // 判断当前的url是否包含/my/ 如果包含 则发送token
     if (opt.url.indexOf('/my/') > -1) {
         opt.headers = {
+            //请求头 配置对象
             Authorization: localStorage.getItem('token') || '',
         }
     }
     // 统一处理服务端返回的未登录 错误
     opt.complete = function (res) {
-        if (res.responseJSON.status === 1) {
+        if (res.responseJSON.status === 1&&res.responseJSON.message==='身份验证失败！') {
             // 1.提示用户没有权限
             alert('对不起,您的登录失效,请重新登录')
             // 2.删除可能伪造的token
