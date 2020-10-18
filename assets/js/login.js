@@ -45,14 +45,14 @@ $(function () {
             password: $('.reg-box [name=password]').val().trim(),
         };
         //发送注册信息
-        $.post('http://ajax.frontend.itheima.net' + '/api/reguser', data, function (res) {
+        $.post('/api/reguser', data, function (res) {
             if (res.status !== 0) {
                 layui.layer.msg(res.message)
             } else {
                 layui.layer.msg(res.message, function () {
                     //触发点击事件 切换 显示窗口
                     $('#link_login').click();
-                    //清空注册表单的内容
+                    //清空注册表单的内容  jquery没有reset方法，故调用dom的reset方法
                     $('#form_reg')[0].reset();
                 });
 
@@ -64,20 +64,24 @@ $(function () {
     })
 
     //监听登录表单的提交事件
-    $('#form_login').on('submit', function (e) {
-        e.preventDefault();
-        var dataStr = $('this').serialize();
+    $('#form_login').submit(function(e) {
+        // 阻止默认提交行为
+        e.preventDefault()
         $.ajax({
-            method: 'post',
-            url: 'http://ajax.frontend.itheima.net/api/login',
-            data: dataStr,
-            success:function (res) {
-                layui.layer.msg(res.message, function () {
-                    if (res.status !== 0) {
-                        location.href='/index.html'
-                    }
-                })
+          url: '/api/login',
+          method: 'POST',
+          // 快速获取表单中的数据
+          data: $(this).serialize(),
+          success: function(res) {
+            if (res.status !== 0) {
+              return layui.layer.msg('登录失败！')
             }
+            layui.layer.msg('登录成功！')
+            // 将登录成功得到的 token 字符串，保存到 localStorage 中
+            localStorage.setItem('token', res.token)
+            // 跳转到后台主页
+            location.href = '/index.html'
+          }
         })
     })
 
