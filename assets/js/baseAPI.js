@@ -14,13 +14,13 @@ $.ajaxPrefilter(function (opt) {
     }
     // 统一处理服务端返回的未登录 错误
     opt.complete = function (res) {
-        if (res.responseJSON.status === 1&&res.responseJSON.message==='身份验证失败！') {
+        if (res.responseJSON.status === 1 && res.responseJSON.message === '身份验证失败！') {
             // 1.提示用户没有权限
             alert('对不起,您的登录失效,请重新登录')
             // 2.删除可能伪造的token
             localStorage.removeItem('token')
             // 3.页面跳转到登录
-            location.href='/login.html'
+            window.top.location.href = '/login.html'
         }
     }
 })

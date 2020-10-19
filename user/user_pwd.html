@@ -34,7 +34,7 @@
                   <div class="layui-form-item">
                     <label class="layui-form-label">确认新密码</label>
                     <div class="layui-input-block">
-                      <input type="password" required  lay-verify="required" placeholder="请确认新密码" autocomplete="off" class="layui-input">
+                      <input type="password" required  lay-verify="required|rePwd" placeholder="请确认新密码" autocomplete="off" class="layui-input">
                     </div>
                   </div>
                   <!-- 按钮区域 -->
@@ -42,7 +42,7 @@
                     <div class="layui-input-block">
                         
                         <!-- 普通按钮作为提交按钮 -->
-                      <button id="btnSubmit" type="button" class="layui-btn" lay-submit lay-filter="formDemo">修改密码</button>
+                      <button id="btnSubmit" type="submit" class="layui-btn" lay-submit lay-filter="formDemo">修改密码</button>
                       
                       
                       <!-- 普通按钮作为重置按钮 -->
