@@ -1,0 +1,24 @@
+html,body {
+    margin: 0;
+    padding: 0;
+}
+body {
+    padding: 15px;
+    background-color: #f2f3f5;
+}
+/* 标题区样式 */
+.layui-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+/* 分类列表 新增面板样式 */
+#formAdd {
+    padding-top: 20px;
+    padding-right: 30px;
+}
+/* 分类列表 编辑面板样式 */
+#formEdit {
+    padding-top: 20px;
+    padding-right: 30px;
+}
